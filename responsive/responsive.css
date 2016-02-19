@@ -69,7 +69,7 @@
 		background-position: -384px -240px;
 	}
 }
-@media only screen and (min-width: 400px) {
+@media only screen and (max-width: 400px) {
 	.software {
 		width: 128px;
 		height: 240px;
