@@ -1,4 +1,5 @@
 1. Identify what aspects of the work have been correctly implemented and what have not.
+
 Implement:
 - Create a web page that annotates a music video with its lyrics and two images.
 - Use a css file to modify the style of the web page.
