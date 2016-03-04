@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>My Old Kentucky Home</title>
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+<h1 id="title">My Old Kentucky Home</h1>
+
+<video src="https://www.cs.tufts.edu/comp/20/my_old_kentucky_home.mp4" id="video"></video>
+<p>Time (in seconds): <span id="timer"></span></p>
+<div id="lyrics"></div> 
+<div id="Image"></div>
+<div id="Picture"></div>
+
+<p><button type="button" onclick="video.play();">Play</button>
+<button type="button" onclick="video.pause();">Pause</button>
+<button type="button" onclick="video.currentTime = video.currentTime - 1;"><< Rewind</button>
+<button type="button" onclick="video.currentTime = video.currentTime + 1">>> Forward</button>
+</p>
+<script type="text/javascript">
+	var video = document.getElementById("video");
+	var caption = document.getElementById("lyrics");
+	var image = document.getElementById("Image");
+	var image = document.getElementById("Picture");
+	var timer = document.getElementById("timer");
+	video.addEventListener("timeupdate", function() {
+		console.log("Hello Nate!");
+		timer.innerHTML = video.currentTime;
+		
+		if (video.currentTime < 8) {
+			caption.innerHTML = '<p><img src="people.jpg" alt="Image" /></p>';
+		}
+		else if (video.currentTime > 8 && video.currentTime < 15) {
+			caption.innerHTML = "<h2>The sun shines bright in My Old Kentucky Home,</h2>";
+		}
+		else if (video.currentTime > 15 && video.currentTime < 22) {
+			caption.innerHTML = "<h1>'Tis summer, the people are gay;</h1>";
+		}
+		else if (video.currentTime > 22 && video.currentTime < 28) {
+			caption.innerHTML = "<h2>The corn-top's ripe and the meadow's in the bloom</h2>";
+		}
+		else if (video.currentTime > 28 && video.currentTime < 35) {
+			caption.innerHTML = "<h1>While the birds make music all the day.</h1>";
+		}
+		else if (video.currentTime > 35 && video.currentTime < 42) {
+			caption.innerHTML = "<h2>The young folks roll on the little cabin floor,</h2>";
+		}
+		else if (video.currentTime > 42 && video.currentTime < 48) {
+			caption.innerHTML = "<h1>All merry, all happy and bright;</h1>";
+		}
+		else if (video.currentTime > 48 && video.currentTime < 55) {
+			caption.innerHTML = "<h2>By 'n' by hard times comes a knocking at the door,</h2>";
+		}
+		else if (video.currentTime > 55 && video.currentTime < 63) {
+			caption.innerHTML = "<h1>Then My Old Kentucky Home, good night!</h1>";
+		}
+		else if (video.currentTime > 63 && video.currentTime < 69) {
+			caption.innerHTML = "<h2>Chorus, weep no more my lady</h2>";
+		}
+		else if (video.currentTime > 69 && video.currentTime < 75) {
+			caption.innerHTML = "<h1>Oh weep no more today;</h1>";
+		}
+		else if (video.currentTime > 75 && video.currentTime < 80) {
+			caption.innerHTML = "<h2>We will sing one song</h2>";
+		}
+		else if (video.currentTime > 80 && video.currentTime < 83) {
+			caption.innerHTML = "<h1>For My Old Kentucky Home</h1>";
+		}
+		else if (video.currentTime > 83 && video.currentTime < 92) {
+			caption.innerHTML = "<h2>For My Old Kentucky Home, far away</h2>";
+		}
+		else {
+			caption.innerHTML = '<p><img src="statepark.jpg" alt="Picture" /></p>';
+		}
+		}, false);
+</script>
+</body>
+</html>
