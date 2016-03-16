@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+<title>Historic Landmarks</title>
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=true"></script>
+<link rel="stylesheet" href="style.css" />
+    
+<script>
+var myLat = 0;
+var myLng = 0;
+
+var request = new XMLHttpRequest();
+var me = new google.maps.LatLng(myLat, myLng);
+
+var map;
+var marker1;
+var marker2;
+var marker3;
+var infowindow = new google.maps.InfoWindow();
+
+var myOptions = {
+    zoom: 13,
+    center: me,
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+};
+
+function init() {
+    map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+    getMyLocation();
+}
+      
+function getMyLocation() 
+{
+    if (navigator.geolocation) 
+    {
+        navigator.geolocation.getCurrentPosition(
+            function(position) 
+            {
+                myLat = position.coords.latitude;
+                myLng = position.coords.longitude;
+                renderMyself();
+
+                request.open("POST", "https://defense-in-derpth.herokuapp.com/sendLocation", true);
+                request.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+                var data = "login=LOU_HATFIELD&lat=" + myLat + "&lng=" + myLng;
+                request.send(data);
+                request.onreadystatechange = renderOthers;
+            }
+        );
+    }
+    else
+        alert("Geolocation is not supported by your web browser.  What a shame!");
+}
+
+function renderMyself()
+{
+    me = new google.maps.LatLng(myLat, myLng);
+        
+    map.panTo(me);
+    var Image = new google.maps.MarkerImage("me.png", null, null, null, new google.maps.Size(25,25));
+
+    marker1 = new google.maps.Marker({position: me, title: "LOU_HATFIELD, " + myLat + ", " + myLng, icon: Image});
+
+    marker1.setMap(map);
+          
+    // Open info window on click of marker
+    google.maps.event.addListener(marker1, 'click', function() {
+        infowindow.setContent(marker1.title);
+        infowindow.open(map, marker1);
+    });
+}
+
+function renderOthers(){
+    if(request.readyState == 4 && request.status == 200) 
+    {
+        var json = JSON.parse(request.responseText);
+        renderMap(json);
+
+    }   
+}
+
+
+function renderMap(json)
+{     
+    for (var i = 0; i < json.people.length; i++) 
+    {
+        if (json.people[i].login != "LOU_HATFIELD")
+        {
+            login = json.people[i]["login"];
+            lat = json.people[i]["lat"];
+            lng = json.people[i]["lng"];
+            
+            people = new google.maps.LatLng(lat, lng)
+            map.panTo(people);    
+            var markerImage2 = new google.maps.MarkerImage("icon.png", null, null, null, new google.maps.Size(12, 34));
+            var distance = get_distance(lat, lng, myLat, myLng).toFixed(2);
+
+            marker2 = new google.maps.Marker({position: people, icon: markerImage2});
+            marker2.setMap(map);
+            marker2.content = json.people[i].login  + ", " + distance + " mile(s)";
+          
+            // Open info window on click of marker
+            google.maps.event.addListener(marker2, 'click', function() 
+            {
+                infowindow.setContent(this.content);
+                infowindow.open(map, this);
+            });
+  
+          }
+      }
+
+   /* for (var i = 0; i < json.landmarks.length; i++) 
+    {
+
+            //Details = json.landmarks[i]["Details"];
+            lat = json.landmarks[i]["geometry"]["coordinates"][0];
+            lng = json.landmarks[i]["geometry"]["coordinates"][1];
+            
+            landmarks = new google.maps.LatLng(lat, lng)
+            map.panTo(landmarks);    
+            var markerImage3 = new google.maps.MarkerImage("landmarks.png", null, null, null, new google.maps.Size(20, 20));
+            var distance = get_distance(lat, lng, myLat, myLng).toFixed(2);
+
+            marker3 = new google.maps.Marker({position: landmarks, icon: markerImage3});
+            marker3.setMap(map);
+            marker3.content = json.landmarks[i].Details;
+          
+            // Open info window on click of marker
+            google.maps.event.addListener(marker3, 'click', function() 
+            {
+                infowindow.setContent(this.content);
+                infowindow.open(map, this);
+            });
+  
+          
+    }*/
+}
+
+function get_distance (lat1, lng1, lat2, lng2) {
+
+    var R = 6371; // km
+    var x1 = lat2 - lat1;
+    var dLat = x1 * Math.PI / 180;
+    var x2 = lng2 - lng1;
+    var dLon = x2 * Math.PI / 180;
+
+    var a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.cos(lat1*Math.PI/180) * Math.cos(lat2*Math.PI/180) * Math.sin(dLon/2) * Math.sin(dLon/2);
+
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+    var d = R * c;
+
+    // convert to miles
+    return d / 1.60934;
+}
+ 
+
+
+</script>
+</head>
+
+<body onload="init()">
+<div id="map_canvas"></div>
+</body>
+
+</html>
