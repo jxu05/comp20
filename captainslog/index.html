@@ -6,7 +6,21 @@
 	<title>Captain's Log</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 	<script>
-	  // Your work will be done here...
+	$(document).ready(function()
+	{
+		$("#msg").keypress(function(e){
+			if (e.which == 13) 
+			{
+				var d = new Date();
+				var m = $("#msg").val();
+				$("#log").prepend("<p>" + d + " - " + m + "</p>");
+			}
+
+		});
+
+	});
+
+
 	</script>
 </head>
 
