@@ -13,8 +13,7 @@
 		{
 			var key = localStorage.key(i);
 			var value = localStorage.getItem(key);
-
-    			$('#log').prepend('<p>' + key + ' - ' + value + '</p>');
+			$('#log').prepend('<p>' + key + ' - ' + value + '</p>');
 		}
 
 		$("#msg").keypress(function(e){
