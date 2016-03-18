@@ -121,7 +121,7 @@ function renderMap1(json)
 /*
 function renderMap2(json)
 { 
-   *for (var i = 0; i < json.landmarks.length; i++) 
+    for (var i = 0; i < json.landmarks.length; i++) 
     {
         latLM = json.landmarks[i]["geometry"]["coordinates"][0];
         lngLM = json.landmarks[i]["geometry"]["coordinates"][1];
@@ -133,7 +133,7 @@ function renderMap2(json)
 
         marker3 = new google.maps.Marker({position: landmarks, icon: Image3});
         marker3.setMap(map);
-        marker3.content = distance + " mile(s)";
+        marker3.content = distance2 + " mile(s)";
           
         google.maps.event.addListener(marker3, 'click', function() 
         {
@@ -143,6 +143,7 @@ function renderMap2(json)
     }      
 }
 */
+
 function get_distance (lat1, lng1, lat2, lng2) 
 {
     var R = 6371; // km
