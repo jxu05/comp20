@@ -25,11 +25,13 @@ var myOptions = {
     mapTypeId: google.maps.MapTypeId.ROADMAP
 };
 
+
 function init() {
     map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
     getMyLocation();
 }
-      
+     
+
 function getMyLocation() 
 {
     if (navigator.geolocation) 
@@ -53,6 +55,7 @@ function getMyLocation()
         alert("Geolocation is not supported by your web browser.  What a shame!");
 }
 
+
 function renderMap()
 {
     if(request.readyState == 4 && request.status == 200) 
@@ -64,6 +67,7 @@ function renderMap()
 
     }   
 }
+
 
 function renderMyself()
 {
@@ -87,6 +91,7 @@ function renderMyself()
         polyline.setMap(map);
     });    
 }
+
 
 function renderPeople(json)
 {     
@@ -119,8 +124,7 @@ function renderPeople(json)
     }
 }
 
-// HERE: w/ function renderMap2(), map doesn't show any more
-// I think the problem comes from this function. But I don't know why it does't work.
+
 function renderLandmarks(json)
 { 
     cloDistance = 1;
@@ -160,7 +164,6 @@ function renderLandmarks(json)
         }
     }      
 }
-
 
 
 function get_distance (lat1, lng1, lat2, lng2) 
