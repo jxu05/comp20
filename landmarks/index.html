@@ -124,8 +124,8 @@ function renderMap2(json)
 { 
     for (var i = 0; i < json.landmarks.length; i++) 
     {
-        latLM = json.landmarks[i]["geometry"]["coordinates"][0];
-        lngLM = json.landmarks[i]["geometry"]["coordinates"][1];
+        latLM = json.landmarks[i]["geometry"]["coordinates"][1];
+        lngLM = json.landmarks[i]["geometry"]["coordinates"][0];
             
         landmarks = new google.maps.LatLng(latLM, lngLM)
         map.panTo(landmarks);    
