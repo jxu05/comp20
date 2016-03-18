@@ -17,10 +17,6 @@ var request = new XMLHttpRequest();
 var me = new google.maps.LatLng(myLat, myLng);
 
 var map;
-var marker1;
-var marker2;
-var marker3;
-var closestName;
 var infowindow = new google.maps.InfoWindow();
 
 var myOptions = {
@@ -87,7 +83,7 @@ function renderMyself()
         
         var destinations = [me, closest];
         var polyline = new google.maps.Polyline({
-        path: destinations});
+        path: destinations, strokeColor: "#0000FF"});
         polyline.setMap(map);
     });    
 }
