@@ -101,8 +101,8 @@ function renderMap1(json)
             var Image2 = new google.maps.MarkerImage("people.png", null, null, null, new google.maps.Size(12, 34));
             var distance1 = get_distance(lat, lng, myLat, myLng).toFixed(2);
 
-            if (distance1 <= 1) 
-            {
+            //if (distance1 <= 1) 
+            //{
                 marker2 = new google.maps.Marker({position: people, icon: Image2});
                 marker2.setMap(map);
                 marker2.content = json.people[i].login  + ", " + distance1 + " mile(s)";
@@ -113,7 +113,7 @@ function renderMap1(json)
                     infowindow.setContent(this.content);
                     infowindow.open(map, this);
                 });
-            }
+            //}
         }
     }
 }
@@ -126,21 +126,26 @@ function renderMap2(json)
     {
         latLM = json.landmarks[i]["geometry"]["coordinates"][1];
         lngLM = json.landmarks[i]["geometry"]["coordinates"][0];
+        locName = json.landmarks[i]["properties"]["Location_Name"];
+        details = json.landmarks[i]["properties"]["Details"]
             
         landmarks = new google.maps.LatLng(latLM, lngLM)
         map.panTo(landmarks);    
         var Image3 = new google.maps.MarkerImage("landmarks.png", null, null, null, new google.maps.Size(20, 20));
         var distance2 = get_distance(latLM, lngLM, myLat, myLng).toFixed(2);
-
-        marker3 = new google.maps.Marker({position: landmarks, icon: Image3});
-        marker3.setMap(map);
-        marker3.content = distance2 + " mile(s)";
-          
-        google.maps.event.addListener(marker3, 'click', function() 
+        if (distance2 <= 1) 
         {
-            infowindow.setContent(this.content);
-            infowindow.open(map, this);
-        });
+
+            marker3 = new google.maps.Marker({position: landmarks, icon: Image3});
+            marker3.setMap(map);
+            marker3.content = details;
+          
+            google.maps.event.addListener(marker3, 'click', function() 
+            {
+                infowindow.setContent(this.content);
+                infowindow.open(map, this);
+            });
+        }
     }      
 }
 
