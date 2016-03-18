@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="style.css" />
     
 <script>
+
 var myLat = 0;
 var myLng = 0;
 
@@ -60,9 +61,9 @@ function renderMyself()
     me = new google.maps.LatLng(myLat, myLng);
         
     map.panTo(me);
-    var Image = new google.maps.MarkerImage("me.png", null, null, null, new google.maps.Size(25,25));
+    var Image1 = new google.maps.MarkerImage("me.png", null, null, null, new google.maps.Size(25,25));
 
-    marker1 = new google.maps.Marker({position: me, title: "LOU_HATFIELD, " + myLat + ", " + myLng, icon: Image});
+    marker1 = new google.maps.Marker({position: me, title: "LOU_HATFIELD, " + myLat + ", " + myLng, icon: Image1});
 
     marker1.setMap(map);
           
@@ -73,17 +74,19 @@ function renderMyself()
     });
 }
 
-function renderOthers(){
+function renderOthers()
+{
     if(request.readyState == 4 && request.status == 200) 
     {
         var json = JSON.parse(request.responseText);
-        renderMap(json);
+        renderMap1(json);
+        renderMap2(json);
 
     }   
 }
 
 
-function renderMap(json)
+function renderMap1(json)
 {     
     for (var i = 0; i < json.people.length; i++) 
     {
@@ -95,55 +98,53 @@ function renderMap(json)
             
             people = new google.maps.LatLng(lat, lng)
             map.panTo(people);    
-            var markerImage2 = new google.maps.MarkerImage("people.png", null, null, null, new google.maps.Size(12, 34));
-            var distance = get_distance(lat, lng, myLat, myLng).toFixed(2);
+            var Image2 = new google.maps.MarkerImage("people.png", null, null, null, new google.maps.Size(12, 34));
+            var distance1 = get_distance(lat, lng, myLat, myLng).toFixed(2);
 
-            if (distance <= 1) {
-
-            marker2 = new google.maps.Marker({position: people, icon: markerImage2});
-            marker2.setMap(map);
-            marker2.content = json.people[i].login  + ", " + distance + " mile(s)";
+            if (distance1 <= 1) 
+            {
+                marker2 = new google.maps.Marker({position: people, icon: Image2});
+                marker2.setMap(map);
+                marker2.content = json.people[i].login  + ", " + distance1 + " mile(s)";
           
             // Open info window on click of marker
-            google.maps.event.addListener(marker2, 'click', function() 
-            {
-                infowindow.setContent(this.content);
-                infowindow.open(map, this);
-            });
+                google.maps.event.addListener(marker2, 'click', function() 
+                {
+                    infowindow.setContent(this.content);
+                    infowindow.open(map, this);
+                });
             }
-  
-          }
-      }
-
-   /* for (var i = 0; i < json.landmarks.length; i++) 
-    {
-
-            //Details = json.landmarks[i]["Details"];
-            lat = json.landmarks[i]["geometry"]["coordinates"][0];
-            lng = json.landmarks[i]["geometry"]["coordinates"][1];
-            
-            landmarks = new google.maps.LatLng(lat, lng)
-            map.panTo(landmarks);    
-            var markerImage3 = new google.maps.MarkerImage("landmarks.png", null, null, null, new google.maps.Size(20, 20));
-            var distance = get_distance(lat, lng, myLat, myLng).toFixed(2);
-
-            marker3 = new google.maps.Marker({position: landmarks, icon: markerImage3});
-            marker3.setMap(map);
-            marker3.content = json.landmarks[i].Details;
-          
-            // Open info window on click of marker
-            google.maps.event.addListener(marker3, 'click', function() 
-            {
-                infowindow.setContent(this.content);
-                infowindow.open(map, this);
-            });
-  
-          
-    }*/
+        }
+    }
 }
 
-function get_distance (lat1, lng1, lat2, lng2) {
+/*
+function renderMap2(json)
+{ 
+   *for (var i = 0; i < json.landmarks.length; i++) 
+    {
+        latLM = json.landmarks[i]["geometry"]["coordinates"][0];
+        lngLM = json.landmarks[i]["geometry"]["coordinates"][1];
+            
+        landmarks = new google.maps.LatLng(latLM, lngLM)
+        map.panTo(landmarks);    
+        var Image3 = new google.maps.MarkerImage("landmarks.png", null, null, null, new google.maps.Size(20, 20));
+        var distance2 = get_distance(latLM, lngLM, myLat, myLng).toFixed(2);
 
+        marker3 = new google.maps.Marker({position: landmarks, icon: Image3});
+        marker3.setMap(map);
+        marker3.content = distance + " mile(s)";
+          
+        google.maps.event.addListener(marker3, 'click', function() 
+        {
+            infowindow.setContent(this.content);
+            infowindow.open(map, this);
+        });
+    }      
+}
+*/
+function get_distance (lat1, lng1, lat2, lng2) 
+{
     var R = 6371; // km
     var x1 = lat2 - lat1;
     var dLat = x1 * Math.PI / 180;
@@ -159,8 +160,6 @@ function get_distance (lat1, lng1, lat2, lng2) {
     return d / 1.60934;
 }
  
-
-
 </script>
 </head>
 
