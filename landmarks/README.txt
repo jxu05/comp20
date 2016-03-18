@@ -9,11 +9,13 @@ implement:
 (7) Displays my location on the map with unique marker. Clicking on marker will display the name of the closest historic landmark from where I am including miles away in an info window.
 (8) Renders a polyline connecting my current location and the closest historic landmark from where I am. The polyline is a blue line.
 
+
 2. Identify anyone with whom you have collaborated or discussed the assignment.
 Web Reference:
 https://github.com/tuftsdev/WebProgramming/tree/gh-pages/examples/google_maps
 http://stackoverflow.com/questions/14560999/using-the-haversine-formula-in-javascript
 https://www.youtube.com/watch?v=vUVuCB7eEyk
+
 
 3. Say approximately how many hours you have spent completing the assignment.
 Several days.
