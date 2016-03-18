@@ -20,6 +20,7 @@ var map;
 var marker1;
 var marker2;
 var marker3;
+var closestName;
 var infowindow = new google.maps.InfoWindow();
 
 var myOptions = {
@@ -42,18 +43,30 @@ function getMyLocation()
             {
                 myLat = position.coords.latitude;
                 myLng = position.coords.longitude;
-                renderMyself();
 
                 request.open("POST", "https://defense-in-derpth.herokuapp.com/sendLocation", true);
                 request.setRequestHeader("Content-type","application/x-www-form-urlencoded");
                 var data = "login=LOU_HATFIELD&lat=" + myLat + "&lng=" + myLng;
                 request.send(data);
-                request.onreadystatechange = renderOthers;
+                request.onreadystatechange = renderMap;
+            
             }
         );
     }
     else
         alert("Geolocation is not supported by your web browser.  What a shame!");
+}
+
+function renderMap()
+{
+    if(request.readyState == 4 && request.status == 200) 
+    {
+        var json = JSON.parse(request.responseText);
+        renderPeople(json);
+        renderLandmarks(json);
+        renderMyself();
+
+    }   
 }
 
 function renderMyself()
@@ -63,30 +76,23 @@ function renderMyself()
     map.panTo(me);
     var Image1 = new google.maps.MarkerImage("me.png", null, null, null, new google.maps.Size(25,25));
 
-    marker1 = new google.maps.Marker({position: me, title: "LOU_HATFIELD, " + myLat + ", " + myLng, icon: Image1});
+    marker1 = new google.maps.Marker({position: me, title: "I am LOU_HATFIELD. " + "Closest landmark: " +closestName + "; Distance: " + cloDistance + " mile(s)", icon: Image1});
 
     marker1.setMap(map);
-          
+
     // Open info window on click of marker
     google.maps.event.addListener(marker1, 'click', function() {
         infowindow.setContent(marker1.title);
         infowindow.open(map, marker1);
-    });
+        
+        var destinations = [me, closest];
+        var polyline = new google.maps.Polyline({
+        path: destinations});
+        polyline.setMap(map);
+    });    
 }
 
-function renderOthers()
-{
-    if(request.readyState == 4 && request.status == 200) 
-    {
-        var json = JSON.parse(request.responseText);
-        renderMap1(json);
-        renderMap2(json);
-
-    }   
-}
-
-
-function renderMap1(json)
+function renderPeople(json)
 {     
     for (var i = 0; i < json.people.length; i++) 
     {
@@ -101,40 +107,43 @@ function renderMap1(json)
             var Image2 = new google.maps.MarkerImage("people.png", null, null, null, new google.maps.Size(12, 34));
             var distance1 = get_distance(lat, lng, myLat, myLng).toFixed(2);
 
-            //if (distance1 <= 1) 
-            //{
-                marker2 = new google.maps.Marker({position: people, icon: Image2});
-                marker2.setMap(map);
-                marker2.content = json.people[i].login  + ", " + distance1 + " mile(s)";
+
+            marker2 = new google.maps.Marker({position: people, icon: Image2});
+            marker2.setMap(map);
+            marker2.content = json.people[i].login  + ", " + distance1 + " mile(s)";
           
             // Open info window on click of marker
-                google.maps.event.addListener(marker2, 'click', function() 
-                {
-                    infowindow.setContent(this.content);
-                    infowindow.open(map, this);
-                });
-            //}
+            google.maps.event.addListener(marker2, 'click', function() 
+            {
+                infowindow.setContent(this.content);
+                infowindow.open(map, this);
+            });
+            
         }
     }
 }
 
 // HERE: w/ function renderMap2(), map doesn't show any more
 // I think the problem comes from this function. But I don't know why it does't work.
-function renderMap2(json)
+function renderLandmarks(json)
 { 
+    cloDistance = 1;
+    closestName = "None";
+
     for (var i = 0; i < json.landmarks.length; i++) 
     {
         latLM = json.landmarks[i]["geometry"]["coordinates"][1];
         lngLM = json.landmarks[i]["geometry"]["coordinates"][0];
-        locName = json.landmarks[i]["properties"]["Location_Name"];
-        details = json.landmarks[i]["properties"]["Details"]
-            
-        landmarks = new google.maps.LatLng(latLM, lngLM)
-        map.panTo(landmarks);    
-        var Image3 = new google.maps.MarkerImage("landmarks.png", null, null, null, new google.maps.Size(20, 20));
+
         var distance2 = get_distance(latLM, lngLM, myLat, myLng).toFixed(2);
         if (distance2 <= 1) 
         {
+            locName = json.landmarks[i]["properties"]["Location_Name"];
+            details = json.landmarks[i]["properties"]["Details"];
+            
+            landmarks = new google.maps.LatLng(latLM, lngLM)
+            map.panTo(landmarks);    
+            var Image3 = new google.maps.MarkerImage("landmarks.png", null, null, null, new google.maps.Size(20, 20));
 
             marker3 = new google.maps.Marker({position: landmarks, icon: Image3});
             marker3.setMap(map);
@@ -145,9 +154,17 @@ function renderMap2(json)
                 infowindow.setContent(this.content);
                 infowindow.open(map, this);
             });
+
+            if (cloDistance > distance2) 
+            {
+                cloDistance = distance2;
+                closestName = locName;
+                closest = landmarks;
+            }
         }
     }      
 }
+
 
 
 function get_distance (lat1, lng1, lat2, lng2) 
