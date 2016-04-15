@@ -42,7 +42,7 @@ function getMyLocation()
                 myLat = position.coords.latitude;
                 myLng = position.coords.longitude;
 
-                request.open("POST", "https://defense-in-derpth.herokuapp.com/sendLocation", true);
+                request.open("POST", "https://secure-coast-91078.herokuapp.com/sendLocation", true);
                 request.setRequestHeader("Content-type","application/x-www-form-urlencoded");
                 var data = "login=LOU_HATFIELD&lat=" + myLat + "&lng=" + myLng;
                 request.send(data);
