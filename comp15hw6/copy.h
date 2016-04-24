@@ -1,9 +1,12 @@
+#ifndef COPY_H
+#define COPY_H
+
 #include <iostream>
 #include <fstream>
 
 using namespace std;
 
-const int INITIAL_CAPACITY = 10; // the initial size of our list.
+const int INITIAL_CAPACITY = 1; // the initial size of our list.
 
 struct CopyNode
 {
@@ -17,9 +20,13 @@ public:
 	Copy();
 	~Copy();
 	void add(string str1, string str2);
-	void expand();
-
+	void print();
 	CopyNode* list;
-	int capacity;
 	int count;
+
+private:
+	int capacity;
+	void expand();
 };
+
+#endif

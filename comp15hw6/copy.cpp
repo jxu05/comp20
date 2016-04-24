@@ -3,7 +3,7 @@
 using namespace std;
 
 Copy::Copy() {
-	list = new Copy[INITIAL_CAPACITY];
+	list = new CopyNode[INITIAL_CAPACITY];
 	capacity = INITIAL_CAPACITY;
 	count = 0;
 }
@@ -15,11 +15,10 @@ Copy::~Copy() {
 void Copy::add(string str1, string str2) {
 	if (count >= capacity)
 		expand();
-	else {
-		list[count].people = str1;
-		list[count].course = str2;
-		count++;
-	}
+
+	list[count].people = str1;
+	list[count].course = str2;
+	count++;
 }
 
 void Copy::expand() {
@@ -29,4 +28,8 @@ void Copy::expand() {
 	delete[] list;
 	list = new_list;
 	capacity *= 2; 
+}
+void Copy::print() {
+	for (int i = 0; i < count; i++)
+		cout << list[i].people + " " + list[i].course << endl;
 }
