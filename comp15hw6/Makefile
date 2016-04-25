@@ -11,5 +11,5 @@ hw6degrees: main.cpp copy.cpp copy.h trie.h trie.cpp trienode.h trienode.cpp
 clean:
 	rm -f hw6degrees
 
-provide:
-	provide comp15 hw6 main.cpp Makefile ReadMe.md copy.cpp copy.h trie.cpp trie.h trienode.h trienode.cpp
+make provide:
+	provide comp15 hw6 main.cpp copy.cpp copy.h trie.cpp trie.h trienode.h trienode.cpp \ ReadMe.md Makefile 

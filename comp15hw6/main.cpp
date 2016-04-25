@@ -15,7 +15,8 @@ void findshortestpath(string&, string&, Trie*, Trie*);
 
 int main(int argc, char *argv[]) {
     ifstream input;
-    string line, str1, str2, callstr, call1, call2, student_a, student_b;
+    string line, str1, str2, str3, str4;
+    string callstr, call1, call2, student_a, student_b;
     Copy file[2];
     assert(argc > 1);
 
@@ -26,6 +27,11 @@ int main(int argc, char *argv[]) {
             size_t pos = line.find(":");
             str1 = line.substr(0, pos);
             str2 = line.substr(pos+1);
+            size_t subpos = str2.find(":");
+            str3 = str2.substr(0, subpos);
+            str4 = str2.substr(subpos+1);
+            str2 = str3 + str4;
+
             file[fileNum].add(str1, str2);
         } 
         input.close();     
