@@ -14,7 +14,9 @@ TrieNode::TrieNode() {
 
 }
 
-TrieNode::~TrieNode() {}
+TrieNode::~TrieNode() {
+	
+}
 
 void TrieNode::addEdge(string edge) {
 	if (edgeCount >= edgeCap) {

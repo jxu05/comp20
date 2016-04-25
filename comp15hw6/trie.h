@@ -11,12 +11,13 @@ using namespace std;
 class Trie {
 public:
     Trie();
-    //~Trie();
+    ~Trie();
  
     // Inserts a word into the trie.
     void insert(string word);
 
     // Returns if the word is in the trie.
+    TrieNode *  searchPos(string word);
     bool search(string word);
 
     void print();

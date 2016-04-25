@@ -6,11 +6,12 @@
 #include <cassert>
 
 #include "copy.h"
-//#include "trie.h"
 
 using namespace std;
 
 void creatTrie(Copy*, Copy*, Trie*, Trie*, Trie*);
+void findpaths(string&, string&, Trie*, Trie*);
+void findshortestpath(string&, string&, Trie*, Trie*);
 
 int main(int argc, char *argv[]) {
     ifstream input;
@@ -43,25 +44,37 @@ int main(int argc, char *argv[]) {
     if (call1 == "lc")
         lc.print();
     if (call1 == "taed") {
-        lt.printEdge(call2);
+        if (!lt.search(call2))
+            cout << "Student not found" << endl;
+        else
+            lt.printEdge(call2);
+        
     }
     if (call1 == "roster") {
-        lc.printEdge(call2);
+        if (!lc.search(call2))
+            cout << "Course not found" << endl;
+        else
+            lc.printEdge(call2);
+        
     }
     if (call1 == "paths") {
         size_t pos2 = call2.find(" ");
         student_a = call2.substr(0, pos2);
         student_b = call2.substr(pos2+1);
-        cout << student_a << endl;
-        cout << student_b << endl;
+        if (!ls.search(student_a) or !ls.search(student_b))
+            cout << "Student not found" << endl;
+        else
+            findpaths(student_a, student_b, &lc, &lt);
 
     }
     if (call1 == "shortestpath") {
         size_t pos2 = call2.find(" ");
         student_a = call2.substr(0, pos2);
         student_b = call2.substr(pos2+1);
-        cout << student_a << endl;
-        cout << student_b << endl;
+        if (!ls.search(student_a) or !ls.search(student_b))
+            cout << "Student not found" << endl;
+        else        
+            findshortestpath(student_a, student_b, &lc, &lt);
     }
 
     return 0;
@@ -90,4 +103,15 @@ void creatTrie(Copy* student, Copy* ta, Trie* ps, Trie* pc, Trie* pt) {
         pt->insert(taNM);
         pt->insertEdge(taNM, course_NM);
     }
+}
+
+void findpaths(string &student_a, string &student_b, Trie* pc, Trie* pt){
+    cout << student_a << endl;
+    cout << student_b << endl;
+    
+
+}
+
+void findshortestpath(string &student_a, string &student_b, Trie* pc, Trie* pt){
+
 }
