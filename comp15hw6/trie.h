@@ -18,8 +18,13 @@ public:
 
     // Returns if the word is in the trie.
     bool search(string word);
+
     void print();
-    void printSorted(TrieNode* p, string s); 
+    void printSorted(TrieNode* p, string s);
+
+    bool insertEdge(string word, string str);
+
+    bool printEdge(string word);  
  
 private:
     TrieNode* root;

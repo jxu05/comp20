@@ -8,7 +8,8 @@ Trie::Trie() {
 // Inserts a word into the trie.
 void Trie::insert(string word) {
     TrieNode *p = root;
-    for(int i = 0; i < word.size(); i++){
+    int size = word.size();
+    for(int i = 0; i < size; i++){
         if(p->next[word[i]-'!'] == NULL){
             p->next[word[i]-'!'] = new TrieNode();
         }
@@ -20,7 +21,8 @@ void Trie::insert(string word) {
 // Returns if the word is in the trie.
 bool Trie::search(string word) {
     TrieNode *p = root;
-    for(int i = 0; i < word.size(); i++){
+    int size = word.size();
+    for(int i = 0; i < size; i++){
         if(p == NULL) 
             return false;
         p = p->next[word[i]-'!'];
@@ -31,9 +33,27 @@ bool Trie::search(string word) {
         return true;        
 }
 
+bool Trie::insertEdge(string word, string str) {
+    // find the leaf
+    TrieNode *p = root;
+    int size = word.size();
+    for(int i = 0; i < size; i++){
+        if(p == NULL) 
+            return false;
+        p = p->next[word[i]-'!'];
+    }
+    if(p == NULL || p->isString == false) { 
+        return false;}
+    else {
+        p->addEdge(str);
+        return true;    
+    }    
+}
+
 void Trie::print() {
     printSorted(root, "");
 }
+
 void Trie::printSorted(TrieNode* p, string s) {
     if (p->isString)
         cout << s << endl;
@@ -43,5 +63,21 @@ void Trie::printSorted(TrieNode* p, string s) {
             char ch = '!' + i;
             printSorted(p->next[i], s+ch);
         }
+    }
+}
+
+bool Trie::printEdge(string word) {
+    TrieNode *p = root;
+    int size = word.size();
+    for(int i = 0; i < size; i++){
+        if(p == NULL) 
+            return false;
+        p = p->next[word[i]-'!'];
+    }
+    if(p == NULL || p->isString == false) 
+        return false;
+    else {
+        p->printEdgelist();
+        return true;
     }
 }
