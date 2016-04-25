@@ -1,12 +1,14 @@
-#ifndef COPY_H
-#define COPY_H
+//#ifndef COPY_H
+//#define COPY_H
 
 #include <iostream>
 #include <fstream>
+#include <cstdlib>
+#include "trie.h"
 
 using namespace std;
 
-const int INITIAL_CAPACITY = 1; // the initial size of our list.
+const int INITIAL_CAPACITY = 10; // the initial size of our list.
 
 struct CopyNode
 {
@@ -29,4 +31,4 @@ private:
 	void expand();
 };
 
-#endif
+//#endif
