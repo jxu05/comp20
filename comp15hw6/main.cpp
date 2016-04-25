@@ -36,12 +36,15 @@ int main(int argc, char *argv[]) {
 }
 
 void creatTrie(Copy* student, Copy* ta) {
-    Trie ls, lt;
+    Trie ls, lc;
     for (int i = 0; i < student->count; i++) {
         ls.insert(student->list[i].people);
-        cout << student->list[i].people << endl;
+        lc.insert(student->list[i].course);
     }
-    cout << ls.search("George.Clooney") << endl;
-    cout << ls.search("Apple") << endl;
-    //ls.print();
+    for (int i = 0; i < ta->count; i++) {
+        ls.insert(ta->list[i].people);
+        lc.insert(ta->list[i].course);
+    }
+    ls.print();
+    lc.print();
 }

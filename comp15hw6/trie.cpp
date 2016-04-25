@@ -30,29 +30,18 @@ bool Trie::search(string word) {
     else
         return true;        
 }
-/*
+
 void Trie::print() {
-    printSorted(root, '');
+    printSorted(root, "");
 }
-void Trie::printSorted(TrieNode node, String s) {
-    for (char ch = 0; ch < node.next.length; ch++) {
-      TrieNode child = node.next[ch];
-      if (child != null)
-        printSorted(child, s + ch);
-    }
-    if (node.leaf) {
-      System.out.println(s);
-    }
-  }*/
- 
-/*   // Returns if there is any word in the trie
-    // that starts with the given prefix.
-    bool startsWith(string prefix) {
-        TrieNode *p = root;
-        for(int i = 0; i < prefix.size(); i++) {
-            p = p->next[prefix[i]-'a'];
-            if(p == NULL) return false;
+void Trie::printSorted(TrieNode* p, string s) {
+    if (p->isString)
+        cout << s << endl;
+
+    for (int i = 0; i < SIZE; i ++) {
+        if (p->next[i] != NULL) {
+            char ch = '!' + i;
+            printSorted(p->next[i], s+ch);
         }
-        return true;
     }
-*/
+}

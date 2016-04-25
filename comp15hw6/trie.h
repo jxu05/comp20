@@ -31,13 +31,8 @@ public:
 
     // Returns if the word is in the trie.
     bool search(string word);
-   // void print();
-    //void printSorted(TrieNode p, String s) 
-    //int count;
- 
-    // Returns if there is any word in the trie
-    // that starts with the given prefix.
-    //bool startsWith(string prefix);
+    void print();
+    void printSorted(TrieNode* p, string s); 
  
 private:
     TrieNode* root;
