@@ -4,22 +4,9 @@
 #include <cstdlib>
 #include <string>
 
+#include "trienode.h"
+
 using namespace std;
-
-const int SIZE = 90;	// ASCII：!(33) to z(122) = 84
- 
-struct TrieNode {
-public:
-    // Initialize your data structure here.
-    TrieNode() {
-        for(int i = 0; i < SIZE; i++)
-            next[i] = NULL;
-        isString = false;
-    }
-    TrieNode *next[SIZE];
-    bool isString;
-};
-
 
 class Trie {
 public:

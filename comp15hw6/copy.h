@@ -1,6 +1,3 @@
-//#ifndef COPY_H
-//#define COPY_H
-
 #include <iostream>
 #include <fstream>
 #include <cstdlib>
@@ -30,5 +27,3 @@ private:
 	int capacity;
 	void expand();
 };
-
-//#endif

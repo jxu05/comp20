@@ -1,10 +1,10 @@
 #include "trie.h"
-
+using namespace std;
 
 Trie::Trie() {
     root = new TrieNode();
 }
- 
+
 // Inserts a word into the trie.
 void Trie::insert(string word) {
     TrieNode *p = root;

@@ -1,5 +1,4 @@
 #include "copy.h"
-
 using namespace std;
 
 Copy::Copy() {

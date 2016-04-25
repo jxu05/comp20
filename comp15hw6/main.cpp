@@ -10,11 +10,12 @@
 
 using namespace std;
 
-void creatTrie(Copy*, Copy*);
+void creatTrie(Copy*, Copy*, Trie*, Trie*, Trie*);
+void creatEdge(Copy*, Copy*, Trie*, Trie*, Trie*);
 
 int main(int argc, char *argv[]) {
     ifstream input;
-    string   line;
+    string   line, call;
     Copy file[2];
     assert(argc > 1);
 
@@ -30,21 +31,35 @@ int main(int argc, char *argv[]) {
         input.close();     
     }
     // Creat the Trie
-    creatTrie(&file[0], &file[1]);
+    Trie ls, lc, lt;
+    creatTrie(&file[0], &file[1], &ls, &lc, &lt);
+    creatEdge(&file[0], &file[1], &ls, &lc, &lt);
+    cin >> call;
+    if (call == "ls")
+        ls.print();
+    if (call == "lc")
+        lc.print();
+
 
     return 0;
 }
 
-void creatTrie(Copy* student, Copy* ta) {
-    Trie ls, lc;
-    for (int i = 0; i < student->count; i++) {
-        ls.insert(student->list[i].people);
-        lc.insert(student->list[i].course);
-    }
+void creatTrie(Copy* student, Copy* ta, Trie* ps, Trie* pc, Trie* pt) {
+    // creat ta trie
     for (int i = 0; i < ta->count; i++) {
-        ls.insert(ta->list[i].people);
-        lc.insert(ta->list[i].course);
+        ps->insert(ta->list[i].people);
+        pc->insert(ta->list[i].course);
     }
-    ls.print();
-    lc.print();
+
+    for (int i = 0; i < student->count; i++) {
+        ps->insert(student->list[i].people);
+        pc->insert(student->list[i].course);
+        // add a student to a course
+    }
+
+
+    for (int i = 0; i < ta->count; i++) {
+        pt->insert(ta->list[i].people);
+        // add a counse to the ta
+    }
 }
