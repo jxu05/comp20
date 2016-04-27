@@ -10,35 +10,36 @@
 <p>Prepared by Jingqiong(Jenny) Xu</p>
 
 <h2>Introduction</h2>
-<p>
-	(Provide a description of the product and what you were hired to do)
-	This assessment tests the security of the Historic Landmarks web application developed by Zachary Sogard for COMP20 Assignment 3. The Historic Landmarks is a web application which maintains the client's login, latitude, abd longitude and serves data on the nearest historic landmarks within a mile of the location check-ins.
-</p>
+<p>This assessment tests the security of the Historic Landmarks web application developed by Zachary Sogard for COMP20 Assignment 3. The Historic Landmarks is a web application which maintains the client's login, latitude, and longitude and serves data on the nearest historic landmarks within a mile of the location check-ins.</p>
 
 <h2>Methodology</h2>
-<p>
-	Describe your methodology pen testing the application, including the tools that you used
-</p>
+<p>1. Run the web application locally for black box testing.</p>
+<p>2. Review the code of the web application.</p>
 
 <h2>Abstract of Findings</h2>
-<p>
-	Provide an overview of all the security and privacy issues you identified. This section should be written for non-technical managers who do not have technical expertise and do not have time to read the entire document. Write this section using lay language.
-</p>
+<p>Most of the security problem I found are caused by trusting user's input blindly. The application doesn't check whether the user's inputs meet the requirements. In this situation, the server may be changed to be a different appearance or to crash a user's browser. However, these problems can be solved by proper validation of user inputs.</p>
 
 <h2>Issues Found and Technical Analysis of Issues Found</h2>
-<p>
-	For each issue that you find, document:
-Issue (e.g., database injection, really bad programming practice)
-Location / page where issue was found Severity of issue (e.g., low, medium , or high). Justify your answer.
-Description of issue. How did you find it? A screenshot of problem is excellent.
-Proof of vulnerability. Screenshots are important.
-Resolution. Make recommendation(s) on how issue can be resolved. Show code if possible.
-</p>
+
+<p><strong>1. Attack by Cross Site Scripting (XSS)</strong></p>
+<p>Send the javascript code as an input data, by <strong>curl --data "script code"</strong>.</p>
+<img src="A.png" alt="" title="" height = "200" width = "570">
+<p>This problem can be solved by removing the ability for data to be interpreted as code.</p>
+
+<p><strong>2. No Input Type Validation</strong></p>
+<p>Send any content to be latitude and longitude as the client want, instead of the real data, by <strong>curl --data "login=&lat=&lng="</strong>.</p>
+<img src="B.png" alt="" title="" height = "150" width = "400">
+<p>This problem can be solved by requiring the range and type of the input.</p>
+
+<p><strong>3. No Restrictions on Input Choices</strong></p>
+<p>The client can send data without any limit of length, or set max length to be any length by <strong>input maxlength= "any length"</strong>. It may cause the crash of the database.</p>
+<img src="C.png" alt="" title="" height = "120" width = "1000">
+<p>This problem can be solved by setting limitation of the max length to be unmodifiable.</p>
+
 
 <h2>Conclusion</h2>
-<p>
-	You can also list future considerations and recommendations with costs.
-</p>
+<p>Recommendations: Be careful about the use's inputs and don't trust them blindly. </p>
+<p>All changes are easy to be implemented. Just add more server-side input validation, and such a tast may cost $500.</p>
 
 </body>
 </html>
