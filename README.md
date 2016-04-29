@@ -12,8 +12,8 @@ What was your favorite lab or assignment and why?
 - After this lab, I get the ability to do following things:
 	1. Study from other engineers' codes on GitHub. There are many geeks posting
 	their codes/programs/thoughts by Git.
-	2. Learn how to team work (not only for the team project of this course). I 
-	also found GitHub is a good community to let people all around the world do 
+	2. Learn how to do team work (not only for the team project of this course). 
+	I found GitHub is a good community to let people all around the world do 
 	group work together. 
 		e.g. Homebrew, which we used for lab8, is a product built by people from
 		different countries on GitHub.
@@ -21,8 +21,7 @@ What was your favorite lab or assignment and why?
 
 
 How much do you think you have grown from day 1 of this course to now?
-- Day 1: I know nothing about web programming. I even never heard CSS/javaScript
-before.
+- Day 1: I know nothing about web programming. I even never heard of CSS before.
 - Now: I know how to learn web programming, even computer science. The "Teaching 
 Style and Expectations" of the instruction lecture of day 1 is not abstract to 
 me any more. I really understand what Ming said: "You are responsible for your 
