@@ -8,8 +8,8 @@ else.
 
 
 What was your favorite lab or assignment and why?
-Lab 3: Git/GitHub. 
-After this lab, I get the ability to do following things:
+- Lab 3: Git/GitHub. 
+- After this lab, I get the ability to do following things:
 	1. Study from other engineers' codes on GitHub. There are many geeks posting
 	their codes/programs/thoughts by Git.
 	2. Learn how to team work (not only for the team project of this course). I 
@@ -17,7 +17,7 @@ After this lab, I get the ability to do following things:
 	group work together. 
 		e.g. Homebrew, which we used for lab8, is a product built by people from
 		different countries on GitHub.
-In a word, lab 3 taught me how to use a tool.
+- In a word, lab 3 taught me how to use a tool.
 
 
 How much do you think you have grown from day 1 of this course to now?
@@ -37,13 +37,13 @@ be a professional."
 
 What was the most important thing that you learned in this course? Cite two 
 examples as evidence.
-From read materials and references that the instructor gave us, I know there are 
-a lot of good online resources about web programming.
+- From read materials and references that the instructor gave us, I know there 
+are a lot of good online resources about web programming.
 	e.g. Stackoverflow for asking questions.
 	e.g. Asciinema blog for watching other's coding.
  
 
 Now that you have finished the course, what topic would you like to delve deeper 
 into?
-Web security. (Ming is basically right about web security. But China is a 
+- Web security. (Ming is basically right about web security. But China is a 
 friendly country and I love my country!!!)
